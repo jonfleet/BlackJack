@@ -6,7 +6,8 @@ namespace blackjack
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ConsoleService console = new ConsoleService();
+            console.Start();
         }
     }
 }
