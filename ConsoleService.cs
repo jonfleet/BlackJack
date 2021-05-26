@@ -9,40 +9,72 @@ namespace blackjack
     {
         public void Start()
         {
-            
+
             string keepPlaying;
-            Deck newDeck = new Deck();
 
             Console.WriteLine("Welcome to BlackJack!");
-            
+
             do
             {
-                Card firstPlayerCard = newDeck.Draw();
-                Card firstHouseCard = newDeck.Draw();
-                Card secondPlayerCard = newDeck.Draw();
-                Card secondHouseCard = newDeck.Draw();
+                Deck newDeck = new Deck();
 
-                int houseTotal = firstHouseCard.CardValue + secondHouseCard.CardValue;
-                int playerTotal = firstPlayerCard.CardValue + secondPlayerCard.CardValue;
+                Hand houseHand = new Hand();
+                Hand playerHand = new Hand();
 
-                Console.WriteLine($"House: {firstHouseCard.FaceValue}, {secondHouseCard.FaceValue} ------ Total: {houseTotal}");
-                Console.WriteLine($"Player: {firstPlayerCard.FaceValue}, {secondPlayerCard.FaceValue} ------ Total: {playerTotal}");
+                playerHand.Cards.Add(newDeck.Draw());
+                houseHand.Cards.Add(newDeck.Draw());
+                playerHand.Cards.Add(newDeck.Draw());
+                houseHand.Cards.Add(newDeck.Draw());
 
+                while (true)
+                {
+                    Console.WriteLine("House Hand");
+                    foreach (Card card in houseHand.Cards)
+                    {
+                        Console.WriteLine("---> " + card.FaceValue);
+                    }
+                    
+                    Console.WriteLine("____________");
+                    Console.WriteLine("Card Total is: " + houseHand.CardTotal);
+                    Console.WriteLine("____________");
 
+                    Console.WriteLine("Player Hand");
+                    foreach (Card card in playerHand.Cards)
+                    {
+                        Console.WriteLine("---> " + card.FaceValue);
+                    }
+
+                    Console.WriteLine("____________");
+                    Console.WriteLine("Card Total is: " + playerHand.CardTotal);
+                    Console.WriteLine("____________");
+
+                    Console.WriteLine("Would you like to hit [H] or stay [S]");
+                    string userInput = Console.ReadLine().ToLower();
+                    if (userInput == "h")
+                    {
+                        playerHand.Cards.Add(newDeck.Draw());
+                    }
+                    else if (userInput == "s")
+                    {
+                        break;
+                    }
+
+                }
                 while (true)
                 {
                     Console.WriteLine("Would you like to play again? (Y/N)");
                     keepPlaying = Console.ReadLine().ToLower();
-                
-                    if(keepPlaying == "n")
+
+                    if (keepPlaying == "n")
                     {
                         return;
-                    } else if (keepPlaying == "y")
+                    }
+                    else if (keepPlaying == "y")
                     {
-                        break; 
-                    } 
+                        break;
+                    }
                 }
-                
+
             } while (keepPlaying == "y");
         }
     }
