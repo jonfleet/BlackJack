@@ -14,7 +14,11 @@ namespace blackjack.classes
                 int total = 0;
                 foreach( Card card in Cards)
                 {
-                    total += card.CardValue;
+                    if (!card.FaceDown)
+                    {
+                        total += card.CardValue;
+                    }
+                    
                 }
                 return total;
             }

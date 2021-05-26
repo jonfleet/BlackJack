@@ -7,11 +7,29 @@ namespace blackjack.classes
     public class Card
     {
 
-        public string FaceValue { get; }
+        private string _faceValue { get; set; }
+        public string FaceValue 
+        {
+            get
+            {
+                if (FaceDown)
+                {
+                    return "FaceDown";
+                } else
+                {
+                    return _faceValue;
+                }
+            }
+            set 
+            {
+                _faceValue = value;
+            }
+        }
         public int CardValue { get; }
 
         public int SoftCardValue { get; }
 
+        public bool FaceDown { get; private set; } = false;
         public Card(string faceValue, int cardValue)
         {
             FaceValue = faceValue;
@@ -25,6 +43,10 @@ namespace blackjack.classes
             SoftCardValue = softCardValue;
         }
         
+        public void Flip()
+        {
+            FaceDown = !FaceDown;
+        }
         
     }
 }

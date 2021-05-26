@@ -24,7 +24,11 @@ namespace blackjack
                 playerHand.Cards.Add(newDeck.Draw());
                 houseHand.Cards.Add(newDeck.Draw());
                 playerHand.Cards.Add(newDeck.Draw());
-                houseHand.Cards.Add(newDeck.Draw());
+                
+                // Flip Dealers Second Card so it cannot be seen intially.
+                Card hiddenCard = newDeck.Draw();
+                hiddenCard.Flip();
+                houseHand.Cards.Add(hiddenCard);
 
                 while (true)
                 {
@@ -74,7 +78,7 @@ namespace blackjack
                     {
                         // player Elects to Stay
                         // House plays out moves
-
+                        
 
                         break;
                     }
