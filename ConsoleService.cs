@@ -14,7 +14,7 @@ namespace blackjack
             Deck newDeck = new Deck();
 
             Console.WriteLine("Welcome to BlackJack!");
-
+            
             do
             {
                 Card firstPlayerCard = newDeck.Draw();
@@ -27,17 +27,23 @@ namespace blackjack
 
                 Console.WriteLine($"House: {firstHouseCard.FaceValue}, {secondHouseCard.FaceValue} ------ Total: {houseTotal}");
                 Console.WriteLine($"Player: {firstPlayerCard.FaceValue}, {secondPlayerCard.FaceValue} ------ Total: {playerTotal}");
-                
-                do
+
+
+                while (true)
                 {
                     Console.WriteLine("Would you like to play again? (Y/N)");
                     keepPlaying = Console.ReadLine().ToLower();
-                    Console.WriteLine(keepPlaying);
-                } while (keepPlaying != "y" && keepPlaying != "n");
                 
-            } while (keepPlaying.Equals("y"));
-            
-
+                    if(keepPlaying == "n")
+                    {
+                        return;
+                    } else if (keepPlaying == "y")
+                    {
+                        break; 
+                    } 
+                }
+                
+            } while (keepPlaying == "y");
         }
     }
 }
