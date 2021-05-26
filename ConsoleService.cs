@@ -48,6 +48,22 @@ namespace blackjack
                     Console.WriteLine("Card Total is: " + playerHand.CardTotal);
                     Console.WriteLine("____________");
 
+                    // Check if Player's Card Total is at or above 21 points.
+                    if(playerHand.CardTotal > 21)
+                    {
+                        Console.WriteLine("XXXXXXXXXXXXXXXXXXXXX");
+                        Console.WriteLine("BUST!!!!! Better Luck Next Time");
+                        Console.WriteLine("XXXXXXXXXXXXXXXXXXXXX");
+                        break;
+                    } else if(playerHand.CardTotal == 21)
+                    {
+                        Console.WriteLine("XXXXXXXXXXXXXXXXXXXXX");
+                        Console.WriteLine("BlackJack!!!!! Congratulations. You Win!");
+                        Console.WriteLine("XXXXXXXXXXXXXXXXXXXXX");
+                        break;
+                    }
+
+                    // Hit or Stay
                     Console.WriteLine("Would you like to hit [H] or stay [S]");
                     string userInput = Console.ReadLine().ToLower();
                     if (userInput == "h")
@@ -56,6 +72,10 @@ namespace blackjack
                     }
                     else if (userInput == "s")
                     {
+                        // player Elects to Stay
+                        // House plays out moves
+
+
                         break;
                     }
 
