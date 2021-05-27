@@ -25,22 +25,13 @@ namespace blackjack.classes
                 _faceValue = value;
             }
         }
-        public int CardValue { get; }
-
-        public int SoftCardValue { get; }
+        public int CardValue { get; protected set; }
 
         public bool FaceDown { get; private set; } = false;
         public Card(string faceValue, int cardValue)
         {
             FaceValue = faceValue;
             CardValue = cardValue;
-        }
-
-        public Card(string faceValue, int cardValue, int softCardValue)
-        {
-            FaceValue = faceValue;
-            CardValue = cardValue;
-            SoftCardValue = softCardValue;
         }
         
         public void Flip()

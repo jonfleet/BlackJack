@@ -18,7 +18,7 @@ namespace blackjack.classes
         {
             for(int i = 0; i < 4; i++)
             {
-                deck.Add(new Card("Ace", 1, 11));
+                deck.Add(new Ace());
                 deck.Add(new Card("Two", 2));
                 deck.Add(new Card("Three", 3));
                 deck.Add(new Card("Four", 4));
