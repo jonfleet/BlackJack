@@ -34,7 +34,7 @@ namespace blackjack
                 while (true)
                 {
                     // Display House and Player Hands
-
+                     
                     ConsoleDisplayHand(houseHand, playerHand);
 
                     // Check if Player's Card Total is at or above 21 points.
@@ -124,32 +124,39 @@ namespace blackjack
 
         public void ConsoleDisplayHand(Hand houseHand, Hand playerHand)
         {
+            Console.WriteLine("--------------------------------------------------");
             Console.WriteLine("House Hand");
             foreach (Card card in houseHand.Cards)
             {
                 Console.WriteLine("---> " + card.FaceValue);
             }
-
-            Console.WriteLine("____________");
+            Console.WriteLine("");
+            Console.WriteLine("---------------------");
             Console.WriteLine("Card Total is: " + houseHand.CardTotal);
-            Console.WriteLine("____________");
+            Console.WriteLine("---------------------");
+            Console.WriteLine("");
 
+            Console.WriteLine("--------------------------------------------------");
             Console.WriteLine("Player Hand");
             foreach (Card card in playerHand.Cards)
             {
                 Console.WriteLine("---> " + card.FaceValue);
             }
 
-            Console.WriteLine("____________");
+            Console.WriteLine("");
+            Console.WriteLine("---------------------");
             Console.WriteLine("Card Total is: " + playerHand.CardTotal);
-            Console.WriteLine("____________");
+            Console.WriteLine("---------------------");
+            Console.WriteLine("");
         }
 
         public void ConsolePlayerBust()
         {
+            Console.WriteLine("");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXX");
             Console.WriteLine("BUST!!!!! Better Luck Next Time");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXX");
+            Console.WriteLine("");
         }
 
         public void ConsoleDealerBust()
@@ -163,9 +170,11 @@ namespace blackjack
 
         public void ConsolePlayerBlackjack()
         {
+            Console.WriteLine("");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXX");
             Console.WriteLine("BlackJack!!!!! Congratulations. You Win!");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXX");
+            Console.WriteLine("");
         }
 
         public void ConsoleDealerBlackjack()
