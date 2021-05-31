@@ -4,11 +4,11 @@ using System.Text;
 
 namespace blackjack.classes
 {
-    class Ace : Card
+    public class Ace : Card
     {
         public Ace() : base("Ace", 11){}
 
-        public void ChangeAceValue(Ace ace)
+        public static void ChangeAceValue(Ace ace)
         {
             if(ace.CardValue  == 11)
             {

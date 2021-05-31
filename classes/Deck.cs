@@ -4,7 +4,7 @@ using System.Text;
 
 namespace blackjack.classes
 {
-    class Deck
+    public class Deck
     {
         public List<Card> deck { get; } = new List<Card>();
 

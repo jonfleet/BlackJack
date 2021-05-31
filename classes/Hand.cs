@@ -4,7 +4,7 @@ using System.Text;
 
 namespace blackjack.classes
 {
-    class Hand 
+    public class Hand 
     {
         public List<Card> Cards { get; set; } = new List<Card>();
         public int CardTotal 
@@ -22,7 +22,7 @@ namespace blackjack.classes
 
             for(int i = 0; i < Cards.Count; i++)
             {
-                if(Cards[i] is Ace && Cards[i].CardValue == 1)
+                if(Cards[i] is Ace && Cards[i].CardValue == 11)
                 {
                     aceIndexs.Add(i);
                 }
@@ -34,7 +34,7 @@ namespace blackjack.classes
         // FindTotal Value of the Play Cards
             // Determines if Ace CardValue should be 11 or 1
 
-        private int FindTotal(List<Card> Cards)
+        public int FindTotal(List<Card> Cards)
         {
             int total = 0;
 
@@ -44,16 +44,17 @@ namespace blackjack.classes
                 {
                     if (total + card.CardValue > 21 && card is Ace)
                     {
-                        ((Ace)card).ChangeAceValue((Ace)card);
+                        Ace.ChangeAceValue((Ace)card);
                     }
                     else if (total + card.CardValue > 21)
                     {
                         List<int> aceIndexs = FindAces(Cards);
                         if (aceIndexs.Count > 0)
                         {
-                            ((Ace)Cards[aceIndexs[0]]).ChangeAceValue((Ace)card);
+                            Ace.ChangeAceValue((Ace)Cards[aceIndexs[0]]);
                             
-                            FindTotal(Cards);
+                            total = FindTotal(Cards);
+                            break;
                         }
                     }
 
