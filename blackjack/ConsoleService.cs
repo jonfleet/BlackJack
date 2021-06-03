@@ -10,7 +10,7 @@ namespace blackjack
         public void Start()
         {
 
-            bool keepPlaying = true;
+            bool keepPlaying;
 
             Console.WriteLine("Welcome to BlackJack!");
 
@@ -18,96 +18,30 @@ namespace blackjack
             {
                 //Todo start game method
                 // Deck Object Returns Suffled Deck of 52 Cards
-                Deck newDeck = new Deck();
+                Deck deck = new Deck();
 
                 Hand houseHand = new Hand();
                 Hand playerHand = new Hand();
 
-                playerHand.Cards.Add(newDeck.Draw());
-                houseHand.Cards.Add(newDeck.Draw());
-                playerHand.Cards.Add(newDeck.Draw());
+                playerHand.Cards.Add(deck.Draw());
+                houseHand.Cards.Add(deck.Draw());
+                playerHand.Cards.Add(deck.Draw());
                 
-                // Flip Dealers Second Card so it cannot be seen intially.
-                Card hiddenCard = newDeck.Draw();
                 
-                if(hiddenCard.FaceDown == false)
+                Card hiddenCard = deck.Draw();
+                // Flip Dealers Second Card if not Face Down already so it cannot be seen intially.
+                if (!hiddenCard.FaceDown)
                 {
                     hiddenCard.Flip();
                 }
-                
                 houseHand.Cards.Add(hiddenCard);
 
-                while (true)
-                {
-                    // Display House and Player Hands
-                     
-                    ConsoleDisplayHand(houseHand, playerHand);
+                // Player's Turn
+                PlayPlayerTurn(houseHand, playerHand, deck);
 
-                    // Check if Player's Card Total is at or above 21 points.
-                    if(playerHand.CardTotal > 21)
-                    {
-                        ConsolePlayerBust();
-                        break;
-                    } else if(playerHand.CardTotal == 21)
-                    {
-                        ConsolePlayerBlackjack();
-                        break;
-                    }
-
-                    // Hit or Stay
-                    Console.WriteLine("Would you like to hit [H] or stay [S]");
-                    string userInput = Console.ReadLine().ToLower();
-                    // Player Hits
-                    if (userInput == "h")
-                    {
-                        playerHand.Cards.Add(newDeck.Draw());
-                    }
-                    // Player Stays
-                    else if (userInput == "s")
-                    {
-                        break;
-                    }
-                }
-
-                if (playerHand.CardTotal < 21)
-                {
-                    // Play Out House turn
-
-                    // Flip over House Card.
-                    houseHand.Cards[1].Flip();
-
-                    // Dealer Must Hit until 17
-                    // Dealer Must Hit on a Soft 17 (ACE & SIX)
-                    while (houseHand.CardTotal <= 17)
-                    {
-                        houseHand.Cards.Add(newDeck.Draw());
-                    }
-
-                    // Print out Hands after Dealer Draws
-                    ConsoleDisplayHand(houseHand, playerHand);
-
-                    // Determine if Dealer or Player wins
-                    if (houseHand.CardTotal == 21)
-                    {
-                        ConsoleDealerBlackjack();
-                    }
-                    else if (houseHand.CardTotal == playerHand.CardTotal)
-                    {
-                        ConsoleDraw();
-                    }
-                    else if (houseHand.CardTotal > 21)
-                    {
-                        ConsoleDealerBust();
-                    }
-                    else if (houseHand.CardTotal > playerHand.CardTotal)
-                    {
-                        ConsoleDealerWin();
-                    }
-                    else
-                    {
-                        ConsolePlayerWin();
-                    }
-                }
+                // House's Turn
+                PlayHouseTurn(houseHand, playerHand, deck);
+                
 
                 // Ask User if they would like to keep playing
                 keepPlaying = PlayAgainMenu();
@@ -115,6 +49,83 @@ namespace blackjack
             } while (keepPlaying);
         }
 
+        private void PlayPlayerTurn(Hand houseHand, Hand playerHand, Deck deck)
+        {
+            while (true)
+            {
+                // Display House and Player Hands
+
+                ConsoleDisplayHand(houseHand, playerHand);
+
+                // Check if Player's Card Total is at or above 21 points.
+                if (playerHand.CardTotal > 21)
+                {
+                    ConsolePlayerBust();
+                    break;
+                }
+                else if (playerHand.CardTotal == 21)
+                {
+                    ConsolePlayerBlackjack();
+                    break;
+                }
+
+                // Hit or Stay
+                Console.WriteLine("Would you like to hit [H] or stay [S]");
+                string userInput = Console.ReadLine().ToLower();
+                // Player Hits
+                if (userInput == "h")
+                {
+                    playerHand.Cards.Add(deck.Draw());
+                }
+                // Player Stays
+                else if (userInput == "s")
+                {
+                    break;
+                }
+            }
+        }
+        private void PlayHouseTurn(Hand houseHand, Hand playerHand, Deck deck)
+        {
+            if (playerHand.CardTotal < 21)
+            {
+                // Play Out House turn
+
+                // Flip over House Card.
+                houseHand.Cards[1].Flip();
+
+                // Dealer Must Hit until 17
+                // Dealer Must Hit on a Soft 17 (ACE & SIX)
+                while (houseHand.CardTotal <= 17)
+                {
+                    houseHand.Cards.Add(deck.Draw());
+                }
+
+                // Print out Hands after Dealer Draws
+                ConsoleDisplayHand(houseHand, playerHand);
+
+                // Determine if Dealer or Player wins
+                if (houseHand.CardTotal == 21)
+                {
+                    ConsoleDealerBlackjack();
+                }
+                else if (houseHand.CardTotal == playerHand.CardTotal)
+                {
+                    ConsoleDraw();
+                }
+                else if (houseHand.CardTotal > 21)
+                {
+                    ConsoleDealerBust();
+                }
+                else if (houseHand.CardTotal > playerHand.CardTotal)
+                {
+                    ConsoleDealerWin();
+                }
+                else
+                {
+                    ConsolePlayerWin();
+                }
+            }
+        }
         private bool PlayAgainMenu()
         {
             // Menu asking user if they want to play again
