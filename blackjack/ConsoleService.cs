@@ -10,7 +10,7 @@ namespace blackjack
         public void Start()
         {
 
-            string keepPlaying;
+            bool keepPlaying = true;
 
             Console.WriteLine("Welcome to BlackJack!");
 
@@ -29,8 +29,12 @@ namespace blackjack
                 
                 // Flip Dealers Second Card so it cannot be seen intially.
                 Card hiddenCard = newDeck.Draw();
-                //Todo Check if hidden card is face Up?
-                hiddenCard.Flip();
+                
+                if(hiddenCard.FaceDown == false)
+                {
+                    hiddenCard.Flip();
+                }
+                
                 houseHand.Cards.Add(hiddenCard);
 
                 while (true)
@@ -104,24 +108,31 @@ namespace blackjack
                         ConsolePlayerWin();
                     }
                 }
-               
-                // Menu asking user if they want to play again
-                while (true)
+
+                // Ask User if they would like to keep playing
+                keepPlaying = PlayAgainMenu();
+
+            } while (keepPlaying);
+        }
+
+        private bool PlayAgainMenu()
+        {
+            // Menu asking user if they want to play again
+            string keepPlaying; 
+            while (true)
+            {
+                Console.WriteLine("Would you like to play again? (Y/N)");
+                keepPlaying = Console.ReadLine().ToLower();
+
+                if (keepPlaying == "n")
                 {
-                    Console.WriteLine("Would you like to play again? (Y/N)");
-                    keepPlaying = Console.ReadLine().ToLower();
-
-                    if (keepPlaying == "n")
-                    {
-                        return;
-                    }
-                    else if (keepPlaying == "y")
-                    {
-                        break;
-                    }
+                    return false;
                 }
-
-            } while (keepPlaying == "y");
+                else if (keepPlaying == "y")
+                {
+                    return true;
+                }
+            }
         }
 
         private void ConsoleDisplayHand(Hand houseHand, Hand playerHand)
@@ -152,7 +163,7 @@ namespace blackjack
             Console.WriteLine("");
         }
         //Todo Consider changing private
-        public void ConsolePlayerBust()
+        private void ConsolePlayerBust()
         {
             Console.WriteLine("");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXX");
@@ -161,7 +172,7 @@ namespace blackjack
             Console.WriteLine("");
         }
 
-        public void ConsoleDealerBust()
+        private void ConsoleDealerBust()
         {
             Console.WriteLine("");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
@@ -170,7 +181,7 @@ namespace blackjack
             Console.WriteLine("");
         }
 
-        public void ConsolePlayerBlackjack()
+        private void ConsolePlayerBlackjack()
         {
             Console.WriteLine("");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXX");
@@ -179,7 +190,7 @@ namespace blackjack
             Console.WriteLine("");
         }
 
-        public void ConsoleDealerBlackjack()
+        private void ConsoleDealerBlackjack()
         {
             Console.WriteLine("");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
@@ -188,7 +199,7 @@ namespace blackjack
             Console.WriteLine("");
         }
 
-        public void ConsoleDraw()
+        private void ConsoleDraw()
         {
             Console.WriteLine("");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
@@ -197,7 +208,7 @@ namespace blackjack
             Console.WriteLine("");
         }
 
-        public void ConsoleDealerWin()
+        private void ConsoleDealerWin()
         {
             Console.WriteLine("");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
@@ -206,7 +217,7 @@ namespace blackjack
             Console.WriteLine("");
         }
 
-        public void ConsolePlayerWin()
+        private void ConsolePlayerWin()
         {
             Console.WriteLine("");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
