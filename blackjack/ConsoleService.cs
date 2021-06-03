@@ -16,6 +16,7 @@ namespace blackjack
 
             do
             {
+                //Todo start game method
                 // Deck Object Returns Suffled Deck of 52 Cards
                 Deck newDeck = new Deck();
 
@@ -28,6 +29,7 @@ namespace blackjack
                 
                 // Flip Dealers Second Card so it cannot be seen intially.
                 Card hiddenCard = newDeck.Draw();
+                //Todo Check if hidden card is face Up?
                 hiddenCard.Flip();
                 houseHand.Cards.Add(hiddenCard);
 
@@ -122,7 +124,7 @@ namespace blackjack
             } while (keepPlaying == "y");
         }
 
-        public void ConsoleDisplayHand(Hand houseHand, Hand playerHand)
+        private void ConsoleDisplayHand(Hand houseHand, Hand playerHand)
         {
             Console.WriteLine("--------------------------------------------------");
             Console.WriteLine("House Hand");
@@ -149,7 +151,7 @@ namespace blackjack
             Console.WriteLine("---------------------");
             Console.WriteLine("");
         }
-
+        //Todo Consider changing private
         public void ConsolePlayerBust()
         {
             Console.WriteLine("");

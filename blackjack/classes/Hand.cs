@@ -44,14 +44,14 @@ namespace blackjack.classes
                 {
                     if (total + card.CardValue > 21 && card is Ace)
                     {
-                        Ace.ChangeAceValue((Ace)card);
+                        ((Ace)card).ChangeAceValue();
                     }
                     else if (total + card.CardValue > 21)
                     {
                         List<int> aceIndexs = FindAces(Cards);
                         if (aceIndexs.Count > 0)
                         {
-                            Ace.ChangeAceValue((Ace)Cards[aceIndexs[0]]);
+                            ((Ace)Cards[aceIndexs[0]]).ChangeAceValue();
                             
                             total = FindTotal(Cards);
                             break;

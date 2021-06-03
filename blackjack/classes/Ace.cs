@@ -8,14 +8,14 @@ namespace blackjack.classes
     {
         public Ace() : base("Ace", 11){}
 
-        public static void ChangeAceValue(Ace ace)
+        public void ChangeAceValue()
         {
-            if(ace.CardValue  == 11)
+            if(CardValue  == 11)
             {
-                ace.CardValue = 1;
+                CardValue = 1;
             } else
             {
-                ace.CardValue = 11;
+                CardValue = 11;
             }
         }
     }
