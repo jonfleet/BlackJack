@@ -18,23 +18,13 @@ namespace blackjack
             {
                 //Todo start game method
                 // Deck Object Returns Suffled Deck of 52 Cards
+
                 Deck deck = new Deck();
 
                 Hand houseHand = new Hand();
                 Hand playerHand = new Hand();
 
-                playerHand.Cards.Add(deck.Draw());
-                houseHand.Cards.Add(deck.Draw());
-                playerHand.Cards.Add(deck.Draw());
-                
-                
-                Card hiddenCard = deck.Draw();
-                // Flip Dealers Second Card if not Face Down already so it cannot be seen intially.
-                if (!hiddenCard.FaceDown)
-                {
-                    hiddenCard.Flip();
-                }
-                houseHand.Cards.Add(hiddenCard);
+                DealNewHand(houseHand, playerHand, deck);
 
                 // Player's Turn
                 PlayPlayerTurn(houseHand, playerHand, deck);
@@ -48,7 +38,22 @@ namespace blackjack
 
             } while (keepPlaying);
         }
+        private void DealNewHand(Hand houseHand, Hand playerHand, Deck deck)
+        {
 
+            playerHand.Cards.Add(deck.Draw());
+            houseHand.Cards.Add(deck.Draw());
+            playerHand.Cards.Add(deck.Draw());
+
+
+            Card hiddenCard = deck.Draw();
+            // Flip Dealers Second Card if not Face Down already so it cannot be seen intially.
+            if (!hiddenCard.FaceDown)
+            {
+                hiddenCard.Flip();
+            }
+            houseHand.Cards.Add(hiddenCard);
+        }
         private void PlayPlayerTurn(Hand houseHand, Hand playerHand, Deck deck)
         {
             while (true)
@@ -84,6 +89,8 @@ namespace blackjack
                 }
             }
         }
+
+        
         private void PlayHouseTurn(Hand houseHand, Hand playerHand, Deck deck)
         {
             if (playerHand.CardTotal < 21)
