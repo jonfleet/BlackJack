@@ -16,7 +16,6 @@ namespace blackjack
 
             do
             {
-                //Todo start game method
                 // Deck Object Returns Suffled Deck of 52 Cards
 
                 Deck deck = new Deck();
@@ -155,6 +154,7 @@ namespace blackjack
 
         private void ConsoleDisplayHand(Hand houseHand, Hand playerHand)
         {
+            Console.WriteLine("");
             Console.WriteLine("--------------------------------------------------");
             Console.WriteLine("House Hand");
             foreach (Card card in houseHand.Cards)
