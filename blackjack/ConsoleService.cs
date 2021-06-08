@@ -180,7 +180,7 @@ namespace blackjack
             Console.WriteLine("---------------------");
             Console.WriteLine("");
         }
-        //Todo Consider changing private
+        
         private void ConsolePlayerBust()
         {
             Console.WriteLine("");
